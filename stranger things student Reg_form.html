@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stranger Things - Student Registration</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nosifer', cursive;
+            color: white;
+            background: black;
+            overflow-x: hidden;
+            position: relative;
+
+            background: url("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmRyYzVrb2d6NWJkYmQxc3hsM2ptZG9nOXkzemN0dDRwZ2ZwbjVpcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/F1cehBDCMnsukCPUXo/giphy.gif") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* particles */
+
+        .particle {
+            position: absolute;
+            background: red;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: float 10s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.8;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-1000px) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* floating words */
+
+        .floating-text {
+            position: absolute;
+            color: #ff0000;
+            font-family: 'Creepster', cursive;
+            font-size: 20px;
+            opacity: 0.1;
+            animation: floatText 15s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes floatText {
+            0% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0.1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-800px) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* container */
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 750px;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 10px;
+            animation: glow 3s infinite;
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 20px red;
+            }
+
+            50% {
+                box-shadow: 0 0 40px darkred;
+            }
+
+            100% {
+                box-shadow: 0 0 20px red;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Creepster', cursive;
+            font-size: 38px;
+            color: #ff0000;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px red;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            background: #111;
+            border: 1px solid red;
+            color: white;
+            border-radius: 5px;
+            outline: none;
+            font-family: 'Nosifer', cursive;
+            text-transform: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            box-shadow: 0 0 10px red;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: auto;
+        }
+
+        input[type="submit"] {
+            background: black;
+            color: red;
+            border: 2px solid red;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Creepster', cursive;
+        }
+
+        input[type="submit"]:hover {
+            box-shadow: 0 0 25px #ff0000, 0 0 50px darkred, 0 0 75px #ff4d4d;
+            background: red;
+            color: black;
+        }
+
+        label {
+            color: #ff4d4d;
+            font-family: 'Nosifer', cursive;
+        }
+
+        /* SUCCESS PAGE */
+
+        #successPage {
+            display: none;
+            position: relative;
+            z-index: 1;
+            padding: 50px;
+            text-align: center;
+            color: red;
+            font-family: 'Creepster', cursive;
+            font-size: 40px;
+            text-shadow: 0 0 15px red, 0 0 30px darkred;
+        }
+
+        /* ⭐ calendar icon color fix */
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        @media(max-width:800px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+
+        const particlesCount = 100;
+
+        for (let i = 0; i < particlesCount; i++) {
+
+            const p = document.createElement('div');
+            p.classList.add('particle');
+
+            p.style.left = Math.random() * window.innerWidth + 'px';
+            p.style.top = Math.random() * window.innerHeight + 'px';
+
+            p.style.width = 3 + Math.random() * 4 + 'px';
+            p.style.height = p.style.width;
+
+            p.style.animationDuration = 5 + Math.random() * 15 + 's';
+            p.style.opacity = Math.random();
+
+            document.body.appendChild(p);
+        }
+
+        const words = ["Hawkins", "Demogorgon", "Upside Down", "Eleven", "Mind Flayer", "Mike", "Will", "Dustin", "Lucas", "Max", "Steve", "Hopper", "Nancy", "Jonathan", "Vecna", "Robin", "Billy", "Eddie"];
+
+        for (let i = 0; i < 25; i++) {
+
+            const t = document.createElement('div');
+
+            t.classList.add('floating-text');
+
+            t.style.left = Math.random() * window.innerWidth + 'px';
+            t.style.top = Math.random() * window.innerHeight + 'px';
+
+            t.style.animationDuration = 10 + Math.random() * 20 + 's';
+
+            t.innerText = words[Math.floor(Math.random() * words.length)];
+
+            document.body.appendChild(t);
+        }
+
+    </script>
+
+    <div class="container" id="formPage">
+
+        <h1>Student Registration Form</h1>
+
+        <form onsubmit="return showSuccess()">
+
+            <table>
+
+                <tr>
+                    <td>Student Name :</td>
+                    <td>
+                        <input type="text" placeholder="First Name" required><br><br>
+                        <input type="text" placeholder="Last Name" required>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Father's Name :</td>
+                    <td><input type="text" required></td>
+                </tr>
+
+                <tr>
+                    <td>Date of Birth :</td>
+                    <td><input type="date" required></td>
+                </tr>
+
+                <tr>
+                    <td>Mobile No :</td>
+                    <td><input type="tel" placeholder="+91 XXXXX XXXXX" required></td>
+                </tr>
+
+                <tr>
+                    <td>Email :</td>
+                    <td><input type="email" required></td>
+                </tr>
+
+                <tr>
+                    <td>Password :</td>
+                    <td><input type="password" required></td>
+                </tr>
+
+                <tr>
+                    <td>Gender :</td>
+                    <td>
+                        <input type="radio" name="g" required> Male
+                        <input type="radio" name="g" required> Female
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Department :</td>
+                    <td>
+                        <input type="checkbox"> CSE
+                        <input type="checkbox"> IT
+                        <input type="checkbox"> EEE
+                        <input type="checkbox"> Civil
+                        <input type="checkbox"> Mech
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Course :</td>
+                    <td>
+                        <select required>
+                            <option value="">-- Select Course --</option>
+                            <option>Python</option>
+                            <option>C</option>
+                            <option>C++</option>
+                            <option>Java</option>
+                            <option>Advanced Java</option>
+                            <option>Javascript</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Student Photo :</td>
+                    <td><input type="file" required></td>
+                </tr>
+
+                <tr>
+                    <td>City :</td>
+                    <td><input type="text" required></td>
+                </tr>
+
+                <tr>
+                    <td>Address :</td>
+                    <td><textarea rows="4" required></textarea></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Submit">
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+
+    <div id="successPage">
+        Your record is saved successfully!
+    </div>
+
+    <script>
+
+        function showSuccess() {
+
+            document.getElementById('formPage').style.display = 'none';
+            document.getElementById('successPage').style.display = 'block';
+
+            return false;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
